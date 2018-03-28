@@ -1,0 +1,48 @@
+class PostsController < ApplicationController
+  befor_action :find_post, only: [:show , :edit , :update ,:distroy]
+  def index
+    @posts = Post.all.order("created_at DESC")
+  end
+
+
+  def new
+    @post =Post.new
+  end
+
+  def creat
+    @post =Post.new(post_params)
+    if post.save
+      redirect_to @post
+    else
+      render 'new'
+    end
+  end
+
+  def show
+    @post =Post.find(params[:id])
+  end
+
+  def edit
+  end
+
+  def update
+    if @post.update(post_params)
+      redirect_to @posts
+    else
+      rener 'edit'
+  end
+
+  def distroy
+    @post.distroy
+    redirect_to root_path
+  end
+
+  def find_post
+    @post = Post.find(params[:id])
+  end
+
+  private
+  def params
+    params.require(:post).permit(:title , :body)
+  end
+end
