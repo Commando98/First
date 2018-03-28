@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  befor_action :find_post, only: [:show , :edit , :update ,:distroy]
+  before_action :find_post, only: [:show , :edit , :update ,:distroy]
   def index
     @posts = Post.all.order("created_at DESC")
   end
@@ -9,9 +9,9 @@ class PostsController < ApplicationController
     @post =Post.new
   end
 
-  def creat
+  def create
     @post =Post.new(post_params)
-    if post.save
+    if @post.save
       redirect_to @post
     else
       render 'new'
@@ -27,13 +27,14 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to @posts
+      redirect_to @post
     else
-      rener 'edit'
+      redner 'edit'
+    end
   end
 
-  def distroy
-    @post.distroy
+  def destroy
+    @post.destroy
     redirect_to root_path
   end
 
@@ -42,7 +43,7 @@ class PostsController < ApplicationController
   end
 
   private
-  def params
-    params.require(:post).permit(:title , :body)
+  def post_params
+    params.require(:post).permit(:title, :body)
   end
 end
