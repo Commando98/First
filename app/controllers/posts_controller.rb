@@ -29,7 +29,11 @@ class PostsController < ApplicationController
       redner 'edit'
     end
   end
-
+  def indeex
+    Basecamp.establish_connection!('myhost.basecamphq.com', session[:token], 'X', true)
+    @projects = Basecamp::Project.find(:all)
+  end
+  
   def destroy
     @post.destroy
     redirect_to root_path
