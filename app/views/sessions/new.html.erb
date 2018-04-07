@@ -2,7 +2,7 @@
   <% if flash[:alert] %>
   <p id="notice"><%= flash[:alert] %></p>
   <%end%>
-  <%= form_tag do%>
+  <%= form_tag('sessions/create') do%>
   <fieldset>
     <legend>
       please log in
@@ -14,7 +14,7 @@
       <%= password_field_tag :password, params[:password] %>
     </div>
     <div>
-      <%= sumbit_tag "login" %>
+      <%= submit_tag "login" %>
     </div>
   </fieldset>
 <% end %>

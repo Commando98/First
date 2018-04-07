@@ -3,14 +3,13 @@ Rails.application.routes.draw do
 
   #get 'sessions/new'
 
-  get 'sessions/create'
+  post 'sessions/create'
 
   get 'sessions/destroy'
 
   resources :users
   resources :posts
   root 'posts#index'
-
 
   get 'admin'=> 'admin#index'
   controller :sessions do
